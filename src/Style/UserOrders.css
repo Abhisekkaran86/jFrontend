@@ -1,0 +1,81 @@
+.orders-container {
+  padding: 40px 20px;
+  max-width: 900px;
+  margin: auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fff8e1; /* Soft gold base */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(224, 181, 81, 0.3);
+}
+
+.orders-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.order-card {
+  background: linear-gradient(to right, #fff9e6, #fff2cc); /* Golden gradient */
+  border: 1px solid #e0b551; /* Rich gold border */
+  padding: 24px;
+  margin-bottom: 25px;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(224, 181, 81, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.order-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 22px rgba(224, 181, 81, 0.35);
+}
+
+.order-address {
+  margin: 15px 0;
+  font-weight: 500;
+  color: #5a4b2c; /* Deep brown/gold */
+}
+
+.order-products ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.product-item {
+  display: flex;
+  align-items: center;
+  margin: 12px 0;
+  background-color: #fff7e6;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #e6c17a;
+}
+
+.product-details {
+  margin-left: 12px;
+  color: #4e3b1d; /* Royal brown */
+  font-size: 15px;
+}
+
+.cancel-btn {
+  margin-top: 18px;
+  padding: 10px 18px;
+  background-color: #c62828; /* Deep red for cancel */
+  border: none;
+  color: white;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+.cancel-btn:hover {
+  background-color: #b71c1c;
+}
+
+.cancel-btn[disabled] {
+  background-color: #cfcfcf;
+  cursor: not-allowed;
+  color: #555;
+}
