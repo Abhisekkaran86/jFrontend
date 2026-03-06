@@ -42,7 +42,7 @@ import { useLocation } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
 
 import './App.css';
-import Navbar from './component/Navber';
+import Navbar from './component/Navbar';
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
