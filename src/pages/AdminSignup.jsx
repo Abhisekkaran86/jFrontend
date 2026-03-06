@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom"; // for redirection
 import API from "../utils/api";
-import "../style/Signup.css";
+import "../style/signup.css";
 
 export default function AdminSignup() {
   const [name, setName] = useState("");
