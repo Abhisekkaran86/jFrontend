@@ -113,7 +113,7 @@
 
 import { useEffect, useState } from "react";
 import API from "../utils/api";
-import "../style/AdminDashboard.css";
+import "../style/adminDashboard.css";
 
 export default function AdminDashboard() {
   const [products, setProducts] = useState([]);

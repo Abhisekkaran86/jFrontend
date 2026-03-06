@@ -82,7 +82,7 @@
 // }
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // Add this
-import "../style/Home.css";
+import "../style/home.css";
 
 export default function Home() {
   const [cart, setCart] = useState(() => JSON.parse(localStorage.getItem("cart")) || []);

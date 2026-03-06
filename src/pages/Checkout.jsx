@@ -4,7 +4,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../utils/api";
-import "../style/Checkout.css";
+import "../style/checkout.css";
 
 export default function CheckoutPage() {
   const [cart, setCart] = useState(() => JSON.parse(localStorage.getItem("cart")) || []);

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import API from "../utils/api";
-import "../style/Signup.css"; 
+import "../style/signup.css"; 
 
 export default function Signup() {
   const [name, setName] = useState("");

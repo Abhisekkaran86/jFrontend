@@ -54,7 +54,7 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import "../style/AdminLogin.css";
+import "../style/adminLogin.css";
 
 
 function AdminLogin() {

@@ -68,7 +68,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../utils/api";
-import "../style/ProductCard.css";
+import "../style/productCard.css";
 
 export default function ProductPage() {
   const [products, setProducts] = useState([]);
