@@ -49,7 +49,7 @@ import Login from './pages/Login';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminLogin from './pages/AdminLogin';
 import ProductPage from './pages/ProductPage';
-import CartPage from './pages/Card';
+import CartPage from './pages/Cart';
 import Checkout from './pages/Checkout';
 import UserOrders from './pages/UserOrders';
 import AdminOrders from './pages/AdminOrders';
