@@ -8,9 +8,9 @@
 
 
 import axios from 'axios';
-
+//http://localhost:5000/api
 const API = axios.create({
-  baseURL: 'http://localhost:5000/api',
+  baseURL: 'https://jserver-omega.vercel.app/api',
 });
 
 // Automatically attach the JWT token from localStorage to every request
