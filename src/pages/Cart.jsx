@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../style/cartPages.css";
+import "../style/cartpages.css";
 
 export default function CartPage() {
   const [cart, setCart] = useState(() => JSON.parse(localStorage.getItem("cart")) || []);

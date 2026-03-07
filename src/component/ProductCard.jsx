@@ -1,4 +1,4 @@
-import "../style/productCardd.css";
+import "../style/productcardd.css";
 
 const ProductCard = ({ product, onAddToCart }) => {
   return (
