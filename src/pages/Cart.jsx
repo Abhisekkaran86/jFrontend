@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import "../style/cartpages.css";
 
 export default function CartPage() {
-  const [cart, setCart] = useState(() => JSON.parse(localStorage.getItem("cart")) || []);
+  const [cart, setCart] = useState(
+    () => JSON.parse(localStorage.getItem("cart")) || []
+  );
 
-  // Update localStorage whenever cart state changes
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
@@ -21,9 +21,11 @@ export default function CartPage() {
     setCart((prevCart) =>
       prevCart
         .map((item) =>
-          item._id === productId ? { ...item, quantity: item.quantity - 1 } : item
+          item._id === productId
+            ? { ...item, quantity: item.quantity - 1 }
+            : item
         )
-        .filter((item) => item.quantity > 0) // Remove item if quantity is 0
+        .filter((item) => item.quantity > 0)
     );
   };
 
@@ -35,37 +37,75 @@ export default function CartPage() {
     cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2);
 
   return (
-    <div className="cart-page">
-      <h2>Your Cart</h2>
+    <div className="p-10 font-sans">
+
+      <h2 className="text-2xl font-semibold mb-6">Your Cart</h2>
 
       {cart.length === 0 ? (
-        <p>Your cart is empty.</p>
+        <p className="text-gray-500">Your cart is empty.</p>
       ) : (
-        <div className="cart-items">
+        <div className="flex flex-col gap-6">
+
           {cart.map((item) => (
-            <div key={item._id} className="cart-item">
-              <img src={item.image} alt={item.title} />
-              <div className="item-info">
-                <h3>{item.title}</h3>
-                <p>Price: ${item.price.toFixed(2)}</p>
-                <div className="quantity-controls">
-                  <button onClick={() => handleDecrement(item._id)}>-</button>
-                  <span>{item.quantity}</span>
-                  <button onClick={() => handleIncrement(item._id)}>+</button>
+            <div
+              key={item._id}
+              className="flex gap-6 border-b border-gray-300 pb-6"
+            >
+              <img
+                src={item.image}
+                alt={item.title}
+                className="w-[120px] object-cover rounded"
+              />
+
+              <div className="flex-1">
+
+                <h3 className="text-lg font-semibold">{item.title}</h3>
+
+                <p className="text-gray-600">
+                  Price: ${item.price.toFixed(2)}
+                </p>
+
+                <div className="flex items-center gap-3 my-2">
+
+                  <button
+                    onClick={() => handleDecrement(item._id)}
+                    className="px-3 py-1 border rounded hover:bg-gray-200"
+                  >
+                    -
+                  </button>
+
+                  <span className="font-medium">{item.quantity}</span>
+
+                  <button
+                    onClick={() => handleIncrement(item._id)}
+                    className="px-3 py-1 border rounded hover:bg-gray-200"
+                  >
+                    +
+                  </button>
+
                 </div>
-                <p>Subtotal: ${(item.price * item.quantity).toFixed(2)}</p>
-                <button className="remove-btn" onClick={() => handleRemove(item._id)}>
+
+                <p className="text-gray-700">
+                  Subtotal: ${(item.price * item.quantity).toFixed(2)}
+                </p>
+
+                <button
+                  className="text-red-600 font-semibold mt-2 hover:underline"
+                  onClick={() => handleRemove(item._id)}
+                >
                   Remove
                 </button>
+
               </div>
             </div>
           ))}
+
         </div>
       )}
 
       {cart.length > 0 && (
-        <div className="cart-summary">
-          <h3>Total: ${getTotal()}</h3>
+        <div className="mt-8 text-xl font-bold">
+          Total: ${getTotal()}
         </div>
       )}
     </div>

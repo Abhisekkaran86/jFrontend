@@ -5,7 +5,6 @@ export default function AdminOrders() {
   const [orders, setOrders] = useState([]);
   const token = localStorage.getItem("token");
 
-  // Fetch all orders (admin-only route)
   const fetchOrders = async () => {
     try {
       const res = await axios.get("http://localhost:5000/api/orders", {
@@ -18,7 +17,6 @@ export default function AdminOrders() {
     }
   };
 
-  // Update status of an order
   const updateStatus = async (orderId, status) => {
     try {
       await axios.put(
@@ -28,55 +26,72 @@ export default function AdminOrders() {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      fetchOrders(); // Refresh orders after update
+      fetchOrders();
     } catch (err) {
       console.error(err);
       alert("Failed to update order status");
     }
   };
 
-  // Initial fetch on component mount
   useEffect(() => {
     fetchOrders();
   }, []);
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>All Orders (Admin Panel)</h2>
+    <div className="p-6 max-w-5xl mx-auto">
+
+      <h2 className="text-2xl font-bold mb-6 text-gray-800">
+        All Orders (Admin Panel)
+      </h2>
+
       {orders.length === 0 ? (
-        <p>No orders found.</p>
+        <p className="text-gray-500">No orders found.</p>
       ) : (
         orders.map((order) => (
           <div
             key={order._id}
-            style={{
-              border: "1px solid #ccc",
-              marginBottom: "20px",
-              padding: "15px",
-              borderRadius: "5px",
-              background: "#f9f9f9",
-            }}
+            className="border border-gray-200 rounded-lg p-5 mb-6 bg-gray-50 shadow-sm"
           >
-            <p><strong>Order ID:</strong> {order._id}</p>
-            <p><strong>User:</strong> {order.user.name} ({order.user.email})</p>
-            <p><strong>Status:</strong> {order.status}</p>
-            <p><strong>Address:</strong> {order.address}</p>
-            <p><strong>Total:</strong> ₹{order.total}</p>
+            <p className="text-sm">
+              <span className="font-semibold">Order ID:</span> {order._id}
+            </p>
 
-            <p><strong>Products:</strong></p>
-            <ul>
+            <p className="text-sm">
+              <span className="font-semibold">User:</span> {order.user.name} (
+              {order.user.email})
+            </p>
+
+            <p className="text-sm">
+              <span className="font-semibold">Status:</span>{" "}
+              <span className="text-blue-600 font-medium">{order.status}</span>
+            </p>
+
+            <p className="text-sm">
+              <span className="font-semibold">Address:</span> {order.address}
+            </p>
+
+            <p className="text-sm mb-2">
+              <span className="font-semibold">Total:</span>{" "}
+              <span className="text-yellow-600 font-bold">₹{order.total}</span>
+            </p>
+
+            <p className="font-semibold mt-2">Products:</p>
+
+            <ul className="list-disc ml-6 text-sm text-gray-700">
               {order.products.map((prod, idx) => (
                 <li key={idx}>
-                  Product ID: {prod.productId}, Quantity: {prod.quantity}, Price: ₹{prod.price}
+                  Product ID: {prod.productId} | Quantity: {prod.quantity} | Price: ₹{prod.price}
                 </li>
               ))}
             </ul>
 
-            <div style={{ marginTop: "10px" }}>
-              <label><strong>Update Status: </strong></label>
+            <div className="mt-4">
+              <label className="font-semibold mr-2">Update Status:</label>
+
               <select
                 value={order.status}
                 onChange={(e) => updateStatus(order._id, e.target.value)}
+                className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:border-blue-500"
               >
                 <option value="Pending">Pending</option>
                 <option value="Processing">Processing</option>

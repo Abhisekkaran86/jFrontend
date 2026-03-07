@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import "../style/navstyle.css";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -25,61 +24,80 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="navbar">
-      <div className="navbar-brand">💍 Royal Gold</div>
+    <nav className="bg-[#fffaf0] px-8 py-4 border-b-2 border-yellow-400 flex justify-between items-center shadow-sm font-sans">
 
-      <ul className="navbar-links">
-        {/* Admin links only */}
+      {/* Brand */}
+      <div className="text-2xl font-bold text-yellow-400">
+        💍 Royal Gold
+      </div>
+
+      <ul className="flex gap-5 items-center">
+
+        {/* Admin Links */}
         {isAdmin ? (
           <>
-            <li><Link to="/admin/dashboard">Dashboard</Link></li>
-            <li><Link to="/admin/orders">All Orders</Link></li>
-            <li><Link to="/admin/addAdmin">Add Admin</Link></li>
+            <li>
+              <Link className="nav-link" to="/admin/dashboard">Dashboard</Link>
+            </li>
+
+            <li>
+              <Link className="nav-link" to="/admin/orders">All Orders</Link>
+            </li>
+
+            <li>
+              <Link className="nav-link" to="/admin/addAdmin">Add Admin</Link>
+            </li>
+
             <li>
               <button
                 onClick={handleLogout}
-                style={{
-                  background: "none",
-                  border: "none",
-                  color: "#f00",
-                  cursor: "pointer",
-                  fontSize: "1rem"
-                }}
+                className="text-red-500 cursor-pointer text-base"
               >
                 Logout
               </button>
             </li>
           </>
         ) : (
-          // Regular user or guest
           <>
-            <li><Link to="/">Home</Link></li>
+            <li>
+              <Link className="nav-link" to="/">Home</Link>
+            </li>
 
             {isLoggedIn && (
               <>
-                <li><Link to="/cart">Cart</Link></li>
-                <li><Link to="/checkout">Checkout</Link></li>
-                <li><Link to="/orders">My Orders</Link></li>
+                <li>
+                  <Link className="nav-link" to="/cart">Cart</Link>
+                </li>
+
+                <li>
+                  <Link className="nav-link" to="/checkout">Checkout</Link>
+                </li>
+
+                <li>
+                  <Link className="nav-link" to="/orders">My Orders</Link>
+                </li>
               </>
             )}
 
             {!isLoggedIn ? (
               <>
-                <li><Link to="/admin">Admin</Link></li>
-                <li><Link to="/login">Login</Link></li>
-                <li><Link to="/signup">Signup</Link></li>
+                <li>
+                  <Link className="nav-link" to="/admin">Admin</Link>
+                </li>
+
+                <li>
+                  <Link className="nav-link" to="/login">Login</Link>
+                </li>
+
+                <li>
+                  <Link className="nav-link" to="/signup">Signup</Link>
+                </li>
               </>
             ) : (
               <li>
                 <button
                   onClick={handleLogout}
-                  style={{
-                    background: "none",
-                    border: "none",
-                    color: "#f00",
-                    cursor: "pointer",
-                    fontSize: "1rem"
-                  }}
+                  className="text-red-500 cursor-pointer text-base"
                 >
                   Logout
                 </button>
@@ -87,9 +105,8 @@ export default function Navbar() {
             )}
           </>
         )}
+
       </ul>
     </nav>
   );
 }
-
-

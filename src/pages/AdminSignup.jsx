@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"; // for redirection
+import { useNavigate } from "react-router-dom";
 import API from "../utils/api";
-import "../style/signups.css";
 
 export default function AdminSignup() {
   const [name, setName] = useState("");
@@ -12,19 +11,24 @@ export default function AdminSignup() {
   const signup = async (e) => {
     e.preventDefault();
     try {
-      // Always send admin: true
-      await API.post("/auth/register", { name, email, password,  isAdmin: true, });
+      await API.post("/auth/register", { name, email, password, isAdmin: true });
       alert("Admin signup successful!");
-      navigate("/admin/dashboard"); // Redirect to admin dashboard
+      navigate("/admin/dashboard");
     } catch (err) {
       alert("Admin signup failed. Try again.");
     }
   };
 
   return (
-    <div className="signup-container">
-      <form onSubmit={signup} className="signup-form">
-        <h2>Create Admin Account</h2>
+    <div className="flex justify-center items-center min-h-[90vh] bg-gradient-to-br from-[#fffaf0] to-yellow-200">
+
+      <form
+        onSubmit={signup}
+        className="bg-white p-10 rounded-xl shadow-md w-[320px]"
+      >
+        <h2 className="text-center text-yellow-700 text-2xl mb-6 font-semibold">
+          Create Admin Account
+        </h2>
 
         <input
           type="text"
@@ -32,6 +36,7 @@ export default function AdminSignup() {
           onChange={(e) => setName(e.target.value)}
           placeholder="Full Name"
           required
+          className="w-full p-3 mb-4 border border-gray-300 rounded-lg text-base focus:outline-none focus:border-yellow-500"
         />
 
         <input
@@ -40,6 +45,7 @@ export default function AdminSignup() {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email Address"
           required
+          className="w-full p-3 mb-4 border border-gray-300 rounded-lg text-base focus:outline-none focus:border-yellow-500"
         />
 
         <input
@@ -48,9 +54,15 @@ export default function AdminSignup() {
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
           required
+          className="w-full p-3 mb-4 border border-gray-300 rounded-lg text-base focus:outline-none focus:border-yellow-500"
         />
 
-        <button type="submit">Register Admin</button>
+        <button
+          type="submit"
+          className="w-full py-3 bg-yellow-400 text-gray-800 font-semibold rounded-lg hover:bg-yellow-500 transition"
+        >
+          Register Admin
+        </button>
       </form>
     </div>
   );

@@ -1,8 +1,5 @@
-
-
 import { useEffect, useState } from "react";
 import API from "../utils/api";
-import "../style/Admindashboards.css";
 
 export default function AdminDashboard() {
   const [products, setProducts] = useState([]);
@@ -13,7 +10,7 @@ export default function AdminDashboard() {
     price: "",
   });
   const [image, setImage] = useState(null);
-  const [editingId, setEditingId] = useState(null); // For update mode
+  const [editingId, setEditingId] = useState(null);
 
   const fetchProducts = () => {
     API.get("/products").then((res) => setProducts(res.data));
@@ -43,19 +40,15 @@ export default function AdminDashboard() {
     formData.append("title", form.title);
     formData.append("description", form.description);
     formData.append("price", form.price);
-    if (image) {
-      formData.append("image", image);
-    }
+    if (image) formData.append("image", image);
 
     try {
       if (editingId) {
-        // Update product
         await API.put(`/products/${editingId}`, formData, {
           headers: { "Content-Type": "multipart/form-data" },
         });
         alert("Product updated");
       } else {
-        // Add new product
         await API.post("/products", formData, {
           headers: { "Content-Type": "multipart/form-data" },
         });
@@ -64,7 +57,7 @@ export default function AdminDashboard() {
       resetForm();
       fetchProducts();
     } catch (err) {
-      console.error("Error saving product:", err);
+      console.error(err);
       alert("Error saving product");
     }
   };
@@ -75,8 +68,7 @@ export default function AdminDashboard() {
       alert("Product deleted");
       fetchProducts();
     } catch (error) {
-      console.error("Error deleting product:", error.response);
-      alert(error.response?.data?.message || "Failed to delete product");
+      alert("Failed to delete product");
     }
   };
 
@@ -89,66 +81,122 @@ export default function AdminDashboard() {
     });
     setEditingId(product._id);
     setImage(null);
-    window.scrollTo(0, 0); // scroll to form
+    window.scrollTo(0, 0);
   };
 
   return (
-    <div className="admin-container">
-      <h2 className="dashboard-title">Admin Dashboard</h2>
+    <div className="max-w-[1000px] mx-auto p-6 font-sans text-gray-700">
 
-      <div className="form-card">
-        <h3>{editingId ? "Update Product" : "Add New Product"}</h3>
+      {/* Title */}
+      <h2 className="text-3xl font-semibold text-center mb-6 text-gray-800">
+        Admin Dashboard
+      </h2>
+
+      {/* Form */}
+      <div className="bg-white border border-gray-200 p-6 rounded-lg shadow-sm mb-10">
+        <h3 className="text-xl font-semibold mb-5 text-gray-600">
+          {editingId ? "Update Product" : "Add New Product"}
+        </h3>
+
         <input
           name="name"
           value={form.name}
           onChange={handleChange}
           placeholder="Product Name"
+          className="w-full mb-4 p-3 border rounded-lg focus:outline-none focus:border-blue-500"
         />
+
         <input
           name="price"
           type="number"
           value={form.price}
           onChange={handleChange}
           placeholder="Price (₹)"
+          className="w-full mb-4 p-3 border rounded-lg focus:outline-none focus:border-blue-500"
         />
+
         <input
           name="title"
           value={form.title}
           onChange={handleChange}
           placeholder="Product Title"
+          className="w-full mb-4 p-3 border rounded-lg focus:outline-none focus:border-blue-500"
         />
+
         <textarea
           name="description"
           value={form.description}
           onChange={handleChange}
           placeholder="Description"
+          className="w-full mb-4 p-3 border rounded-lg focus:outline-none focus:border-blue-500"
         />
-        <label className="upload-label">
-          Upload Image:
+
+        {/* Upload */}
+        <label className="block mb-4 cursor-pointer text-blue-500 font-medium">
+          Upload Image
           <input
             type="file"
             onChange={handleImageChange}
             accept="image/*"
-            style={{ display: "none" }}
+            className="hidden"
           />
         </label>
-        <button onClick={saveProduct}>
-          {editingId ? "Update Product" : "Add Product"}
-        </button>
-        {editingId && <button onClick={resetForm}>Cancel</button>}
+
+        <div>
+          <button
+            onClick={saveProduct}
+            className="bg-blue-500 hover:bg-blue-600 text-white px-5 py-3 rounded-lg mr-3 transition"
+          >
+            {editingId ? "Update Product" : "Add Product"}
+          </button>
+
+          {editingId && (
+            <button
+              onClick={resetForm}
+              className="bg-gray-400 hover:bg-gray-500 text-white px-5 py-3 rounded-lg transition"
+            >
+              Cancel
+            </button>
+          )}
+        </div>
       </div>
 
-      <h3>All Products</h3>
-      <div className="product-list">
+      {/* Product List */}
+      <h3 className="text-xl font-semibold mb-5">All Products</h3>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {products.map((p) => (
-          <div className="product-card" key={p._id}>
-            <img src={p.image} alt={p.name} />
-            <h4>{p.name}</h4>
-            <p>₹{p.price}</p>
-            <p className="desc">{p.description}</p>
-            <div>
-              <button onClick={() => handleEdit(p)}>Edit</button>
-              <button onClick={() => deleteProduct(p._id)}>Delete</button>
+          <div
+            key={p._id}
+            className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm text-center"
+          >
+            <img
+              src={p.image}
+              alt={p.name}
+              className="w-full h-[180px] object-cover rounded-lg mb-3"
+            />
+
+            <h4 className="text-lg font-semibold">{p.name}</h4>
+            <p className="font-medium text-yellow-600">₹{p.price}</p>
+
+            <p className="text-sm text-gray-500 h-[40px] overflow-hidden mb-2">
+              {p.description}
+            </p>
+
+            <div className="flex justify-center gap-2">
+              <button
+                onClick={() => handleEdit(p)}
+                className="bg-green-500 hover:bg-green-600 text-white px-3 py-2 rounded-md text-sm"
+              >
+                Edit
+              </button>
+
+              <button
+                onClick={() => deleteProduct(p._id)}
+                className="bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded-md text-sm"
+              >
+                Delete
+              </button>
             </div>
           </div>
         ))}
