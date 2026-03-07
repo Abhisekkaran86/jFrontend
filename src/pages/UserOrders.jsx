@@ -6,18 +6,6 @@ const UserOrders = () => {
   const [myOrders, setMyOrders] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // Fetch user orders
-  // const fetchMyOrders = async () => {
-  //   try {
-  //     setLoading(true);
-  //     const { data } = await API.get("/orders/my");
-  //     setMyOrders(data);
-  //   } catch (err) {
-  //     console.error("My Orders Error:", err.response?.data || err.message);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
 
   const fetchMyOrders = async () => {
   try {

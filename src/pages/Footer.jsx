@@ -29,15 +29,7 @@ export default function Footer() {
           <p>Location: Jhargram, West Bengal, India</p>
         </div>
 
-        {/* <div className="footer-section">
-          <h4>Follow Us</h4>
-          <div className="social-icons">
-            <a href="#"><i className="fab fa-facebook-f"></i></a>
-            <a href="#"><i className="fab fa-instagram"></i></a>
-            <a href="#"><i className="fab fa-twitter"></i></a>
-            <a href="#"><i className="fab fa-youtube"></i></a>
-          </div>
-        </div> */}
+    
       </div>
 
       <div className="footer-bottom">
