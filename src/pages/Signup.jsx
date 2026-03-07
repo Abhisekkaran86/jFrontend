@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import API from "../utils/api";
 
 export default function Signup() {
@@ -6,11 +7,14 @@ export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate();
+
   const signup = async (e) => {
     e.preventDefault();
     try {
       await API.post("/auth/register", { name, email, password });
       alert("Signup successful! Please login.");
+      navigate("/login"); // redirect to login
     } catch (err) {
       alert("Signup failed. Try again.");
     }
